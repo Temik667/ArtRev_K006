@@ -6,7 +6,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 
-sa = gspread.service_account()
+sa = gspread.service_account("service_account.json")
 sh = sa.open("Доступ в К006")
 wks = sh.worksheet("Расписание К006")
 people = sh.worksheet("Список студентов с доступом")
