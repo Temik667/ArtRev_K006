@@ -30,7 +30,6 @@ class Sheet:
     @classmethod
     def isListed(self, name):
         listed = people.col_values(2)
-        print(listed)
         for person in listed:
             if person.lower() == name.lower():
                 return True
