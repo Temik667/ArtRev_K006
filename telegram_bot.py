@@ -15,7 +15,7 @@ NAME1, DAY1, TIME1, FIN1 = range(4)
 #START
 def start(update: Update, context: CallbackContext) -> None:
     user_name = update.message.from_user.name
-    update.message.reply_text("Hello, {}!\nUse the following commands to:\n1./add the rehearsal\n2./delete the rehearsal\n3./list to view the empty slots\n4./myslots to see your slots".format(user_name))
+    update.message.reply_text("Hello, {}!\nUse the following commands to:\n1./add the rehearsal\n2./delete the rehearsal\n3./list to view the empty slots".format(user_name))
 
 #LIST
 def get_list(update: Update, context: CallbackContext) -> None:
