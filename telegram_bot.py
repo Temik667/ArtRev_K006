@@ -2,6 +2,8 @@ from telegram import ReplyKeyboardMarkup, Update, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler
 
 import sheet
+from datetime import date
+from datetime import datetime
 
 sh = sheet.Sheet
 new_slot = {}
@@ -136,6 +138,9 @@ def cancel_delete(update:Update, context: CallbackContext) -> None:
     
 
 def main():
+    if date.isoweekday(date.today()) == 7 and datetime.now().strftime("%H") == "23":
+        sh.reset_list()
+
     updater = Updater(key)
     dispatcher = updater.dispatcher
 
