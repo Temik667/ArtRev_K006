@@ -33,8 +33,12 @@ class Sheet:
     @classmethod
     def isListed(self, name):
         listed = people.col_values(2)
+        print(listed)
         for person in listed:
-            if (person.split()[0] + ' ' + person.split()[1]).lower() == (name.split()[0] + ' ' + name.split()[1]).lower():
+            arr = person.split()
+            if len(person) <= 1:
+                pass
+            elif (arr[0].lower().capitalize() + ' ' + arr[-1].lower().capitalize()) == name:
                 return True
         return False
 
