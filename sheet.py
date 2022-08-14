@@ -26,7 +26,7 @@ class Sheet:
             for cells in rows:
                 if cells.lower() == name.lower():
                     reps += 1
-        if reps >= 3:
+        if reps >= 2:
             return True
         return False
     
@@ -60,7 +60,7 @@ class Sheet:
             
             return 'You can not add slots to the previous days'
         
-        return 'You are you have booked more than 3 slots'
+        return 'You are you have booked more than 2 slots'
     
     # @classmethod
     # def myslots(self, name):
@@ -112,11 +112,7 @@ class Sheet:
     
     @classmethod
     def reset_list(self):
-        cell = ''
-        for day in self.days:
-            for time in self.times:
-                cell = day + time
-                wks.update(cell, '')
+        sh.values_clear("'Расписание К006'!B3:H16")
         
         wks.update('C12', "Art Revolution")
         wks.update('C13', "Art Revolution")
@@ -125,4 +121,6 @@ class Sheet:
         wks.update('E13', "Art Revolution")
 
         wks.update('G12', "Art Revolution")
-        wks.update('G12', "Art Revolution")
+        wks.update('G13', "Art Revolution")
+
+Sheet.reset_list()
