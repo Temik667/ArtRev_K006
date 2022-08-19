@@ -171,10 +171,10 @@ def main():
     dispatcher.add_handler(add_conv)
     dispatcher.add_handler(del_conv)
 
-    now = datetime.now()
-    run_at = now + timedelta(days=7)
-    delay = (run_at - now).total_seconds()
-    threading.Timer(delay, sh.reset_list()).start()
+    # now = datetime.now()
+    # run_at = now + timedelta(days=7)
+    # delay = (run_at - now).total_seconds()
+    # threading.Timer(delay, sh.reset_list()).start()
 
     updater.start_polling()
     updater.idle()

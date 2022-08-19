@@ -122,5 +122,3 @@ class Sheet:
 
         wks.update('G12', "Art Revolution")
         wks.update('G13', "Art Revolution")
-
-Sheet.reset_list()
