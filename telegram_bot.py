@@ -73,7 +73,7 @@ def fin(update: Update, context:CallbackContext) -> None:
     ['15:00 - 16:00'], ['16:00 - 17:00'], ['17:00 - 18:00'], ['18:00 - 19:00'], ['19:00 - 20:00'], ['20:00 - 21:00'], ['21:00 - 22:00'], ['22:00 - 23:00']]
     for i in time:
         if i[-1] == update.message.text:
-            update.message.reply_text(sh.add(new_slot['name'], new_slot['day'], time.index(i) + 9))
+            update.message.reply_text(sh.add(new_slot['name'], new_slot['day'], time.index(i) + 9), reply_markup=ReplyKeyboardRemove())
     new_slot.clear()
     return ConversationHandler.END
 
@@ -128,7 +128,7 @@ def delete_fin(update: Update, context:CallbackContext) -> None:
     ['15:00 - 16:00'], ['16:00 - 17:00'], ['17:00 - 18:00'], ['18:00 - 19:00'], ['19:00 - 20:00'], ['20:00 - 21:00'], ['21:00 - 22:00'], ['22:00 - 23:00']]
     for i in time:
         if i[-1] == update.message.text:
-            update.message.reply_text(sh.delete(del_slot['name'], del_slot['day'], time.index(i) + 9))
+            update.message.reply_text(sh.delete(del_slot['name'], del_slot['day'], time.index(i) + 9), reply_markup=ReplyKeyboardRemove())
     del_slot.clear()
     return ConversationHandler.END
 
@@ -171,8 +171,9 @@ def main():
     dispatcher.add_handler(add_conv)
     dispatcher.add_handler(del_conv)
 
-    now = datetime.now()
-    run_at = now + timedelta(days=7)
+    # Runs at 23.00 on Sunday
+    now = datetime.today()
+    run_at = now + timedelta(days=7-now.weekday()-1, hours = 23 - now.hour, minutes= 0 - now.minute)
     delay = (run_at - now).total_seconds()
     threading.Timer(delay, sh.reset_list()).start()
 

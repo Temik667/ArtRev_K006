@@ -2,7 +2,9 @@ from asyncio.log import logger
 import gspread
 import logging
 from datetime import datetime
+from datetime import timedelta
 from datetime import date
+import threading
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -18,6 +20,15 @@ class Sheet:
     days_int = {'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7}
     times = {9: '3', 10: '4', 11: '5', 12: '6', 13: '7', 14: '8', 15: '9', 16: '10', 17: '11', 18: '12', 19: '13', 20: '14', 21: '15', 22: '16'}
     
+
+    @classmethod
+    def isLimitless(self, name):
+        cell = people.find(name)
+        if people.cell(cell.row, 7).value == '1':
+            return True
+        return False
+
+
     @classmethod
     def isOverLimit(self, name):
         reps = 0
@@ -26,14 +37,15 @@ class Sheet:
             for cells in rows:
                 if cells.lower() == name.lower():
                     reps += 1
-        if reps >= 2:
-            return True
+        if not self.isLimitless(name):
+            if reps >= 2:
+                return True
         return False
+        
     
     @classmethod
     def isListed(self, name):
         listed = people.col_values(2)
-        print(listed)
         for person in listed:
             arr = person.split()
             if len(person) <= 1:
@@ -122,3 +134,9 @@ class Sheet:
 
         wks.update('G12', "Art Revolution")
         wks.update('G13', "Art Revolution")
+
+        wks.update('B13', "Vocal club")
+        wks.update('B14', "Vocal club")
+
+        wks.update('D13', "Vocal club")
+        wks.update('D14', "Vocal club")
