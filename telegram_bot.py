@@ -19,7 +19,7 @@ NAME1, DAY1, TIME1, FIN1 = range(4)
 #START
 def start(update: Update, context: CallbackContext) -> None:
     user_name = update.message.from_user.name
-    update.message.reply_text("Hello, {}!\nUse the following commands to:\n1./add the rehearsal\n2./delete the rehearsal\n3./list to view the empty slots".format(user_name))
+    update.message.reply_text("Hello, {}!\nUse the following commands to:\n1./add the rehearsal\n2./delete the rehearsal\n3./list to view the empty slots\n/cancel to cancel add and delete commands".format(user_name))
 
 #LIST
 def get_list(update: Update, context: CallbackContext) -> None:
@@ -39,10 +39,10 @@ def add(update:Update, context: CallbackContext) -> None:
 
 def name(update:Update, context: CallbackContext) -> None:
     if update.message.text == 'Yes':
-        update.message.reply_text('Enter your first and second name(in order)')
+        update.message.reply_text('Enter your first and second name(in order)', reply_markup=ReplyKeyboardRemove())
         return DAY
     else:
-        update.message.reply_text('Reservation canceled')
+        update.message.reply_text('Reservation canceled', reply_markup=ReplyKeyboardRemove())
         return ConversationHandler.END
 
 def day(update:Update, context: CallbackContext) -> None:
@@ -94,7 +94,7 @@ def delete(update:Update, context:CallbackContext) -> None:
 
 def delete_name(update:Update, context:CallbackContext) -> None:
     if update.message.text == 'Yes':
-        update.message.reply_text('Enter your first and second name(in order)')
+        update.message.reply_text('Enter your first and second name(in order)', reply_markup=ReplyKeyboardRemove())
         return DAY
     else:
         update.message.reply_text('Reservation canceled')
@@ -102,7 +102,7 @@ def delete_name(update:Update, context:CallbackContext) -> None:
 
 def delete_day(update:Update, context: CallbackContext) -> None:
     if sh.isListed(update.message.text) == False:
-        update.message.reply_text("You don't have an access or you are banned")
+        update.message.reply_text("You don't have an access or you are banned", reply_markup=ReplyKeyboardRemove())
         return ConversationHandler.END
     
     del_slot['name']= update.message.text
