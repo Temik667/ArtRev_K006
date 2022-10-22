@@ -126,14 +126,14 @@ class Sheet:
     def reset_list(self):
         sh.values_clear("'Расписание К006'!B3:H16")
         
+        wks.update('C11', "Art Revolution")
         wks.update('C12', "Art Revolution")
-        wks.update('C13', "Art Revolution")
 
+        wks.update('E11', "Art Revolution")
         wks.update('E12', "Art Revolution")
-        wks.update('E13', "Art Revolution")
 
+        wks.update('G11', "Art Revolution")
         wks.update('G12', "Art Revolution")
-        wks.update('G13', "Art Revolution")
 
         wks.update('B13', "Vocal club")
         wks.update('B14', "Vocal club")
