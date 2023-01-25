@@ -2,10 +2,7 @@ from telegram import ReplyKeyboardMarkup, Update, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler
 
 import sheet
-import threading
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
+import schedule
 
 sh = sheet.Sheet
 new_slot = {}
@@ -140,6 +137,8 @@ def cancel_delete(update:Update, context: CallbackContext) -> None:
 
 def main(): 
 
+    schedule.every().sunday.at("23:59").do(sh.reset_list())
+
     updater = Updater(key)
     dispatcher = updater.dispatcher
 
@@ -170,12 +169,6 @@ def main():
     dispatcher.add_handler(CommandHandler("list", get_list))
     dispatcher.add_handler(add_conv)
     dispatcher.add_handler(del_conv)
-
-    # Runs at 23.00 on Sunday
-    now = datetime.today()
-    run_at = now + timedelta(days=7-now.weekday()-1, hours = 23 - now.hour, minutes= 0 - now.minute)
-    delay = (run_at - now).total_seconds()
-    threading.Timer(delay, sh.reset_list()).start()
 
     updater.start_polling()
     updater.idle()
