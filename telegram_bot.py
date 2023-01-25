@@ -137,7 +137,7 @@ def cancel_delete(update:Update, context: CallbackContext) -> None:
 
 def main(): 
 
-    schedule.every().sunday.at("23:59").do(sh.reset_list())
+    schedule.every().sunday.at("23:59").do(sh.reset_list)
 
     updater = Updater(key)
     dispatcher = updater.dispatcher
