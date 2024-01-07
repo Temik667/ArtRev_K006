@@ -143,10 +143,10 @@ def main():
     add_conv = ConversationHandler(
         entry_points=[CommandHandler("add", add)],
         states={
-            NAME: [MessageHandler(Filters.regex('^(Yes|No)$'), name)],
-            DAY: [MessageHandler(Filters.text, day)],
-            TIME: [MessageHandler(Filters.regex('^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$'), time)],
-            FIN: [MessageHandler(Filters.all, fin)]
+            NAME: [MessageHandler(filters.regex('^(Yes|No)$'), name)],
+            DAY: [MessageHandler(filters.text, day)],
+            TIME: [MessageHandler(filters.regex('^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$'), time)],
+            FIN: [MessageHandler(filters.all, fin)]
             },
         fallbacks=[CommandHandler('cancel', cancel_add)],
         conversation_timeout=300
@@ -154,10 +154,10 @@ def main():
     del_conv = ConversationHandler(
         entry_points=[CommandHandler("delete", delete)],
         states={
-            NAME1: [MessageHandler(Filters.regex('^(Yes|No)$'), delete_name)],
-            DAY1: [MessageHandler(Filters.text, delete_day)],
-            TIME1: [MessageHandler(Filters.regex('^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$'), delete_time)],
-            FIN1: [MessageHandler(Filters.all, delete_fin)]
+            NAME1: [MessageHandler(filters.regex('^(Yes|No)$'), delete_name)],
+            DAY1: [MessageHandler(filters.text, delete_day)],
+            TIME1: [MessageHandler(filters.regex('^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)$'), delete_time)],
+            FIN1: [MessageHandler(filters.all, delete_fin)]
         },
         fallbacks=[CommandHandler('cancel', cancel_delete)],
         conversation_timeout=300
