@@ -1,8 +1,6 @@
 from telegram import ReplyKeyboardMarkup, Update, ReplyKeyboardRemove
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler
-
 import sheet
-import schedule
 
 sh = sheet.Sheet
 new_slot = {}
@@ -34,6 +32,7 @@ def add(update:Update, context: CallbackContext) -> None:
     
     return NAME
 
+
 def name(update:Update, context: CallbackContext) -> None:
     if update.message.text == 'Yes':
         update.message.reply_text('Enter your first and second name(in order)', reply_markup=ReplyKeyboardRemove())
@@ -44,7 +43,7 @@ def name(update:Update, context: CallbackContext) -> None:
 
 def day(update:Update, context: CallbackContext) -> None:
     if sh.isListed(update.message.text) == False:
-        update.message.reply_text("You don't have an access or you are banned")
+        update.message.reply_text("You don't have an access")
         return ConversationHandler.END
     
     new_slot['name']= update.message.text
@@ -54,6 +53,7 @@ def day(update:Update, context: CallbackContext) -> None:
         reply_keyboard, one_time_keyboard=True,  input_field_placeholder='Day?'
     ))
     return TIME
+
 
 def time(update:Update, context: CallbackContext) -> None:
     update.message.reply_text(sh.get_list_day(update.message.text))
@@ -136,8 +136,6 @@ def cancel_delete(update:Update, context: CallbackContext) -> None:
 
 
 def main(): 
-
-    schedule.every().sunday.at("23:59").do(sh.reset_list)
 
     updater = Updater(key)
     dispatcher = updater.dispatcher

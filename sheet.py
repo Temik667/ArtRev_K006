@@ -1,11 +1,7 @@
 from asyncio.log import logger
 import gspread
 import logging
-from datetime import datetime
-from datetime import timedelta
 from datetime import date
-import schedule
-import threading
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -126,18 +122,3 @@ class Sheet:
     @classmethod
     def reset_list(self):
         sh.values_clear("'Расписание К006'!B3:H16")
-        
-        wks.update('C11', "Art Revolution")
-        wks.update('C12', "Art Revolution")
-
-        wks.update('E11', "Art Revolution")
-        wks.update('E12', "Art Revolution")
-
-        wks.update('G11', "Art Revolution")
-        wks.update('G12', "Art Revolution")
-
-        wks.update('B13', "Vocal club")
-        wks.update('B14', "Vocal club")
-
-        wks.update('D13', "Vocal club")
-        wks.update('D14', "Vocal club")
